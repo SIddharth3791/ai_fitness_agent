@@ -1,0 +1,11 @@
+server:
+ port: 8081
+ 
+spring: 
+ application:
+  name: 
+ data:
+  mongodb:
+   host: localhost
+   port: 27017
+   database: fitness_activity_db
