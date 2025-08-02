@@ -10,9 +10,11 @@ import com.fitness.agent.UserService.model.User;
 import com.fitness.agent.UserService.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
 	
 	private UserRepository userRepository;
@@ -56,6 +58,11 @@ public class UserService {
 			}else {
 				throw new RuntimeException("User Doesnt Exist");
 			}
+	}
+
+	public Boolean existByUserId(String userId) {
+		log.info("Calling User Validation for User ID {} ", userId);
+		return userRepository.existsById(userId);
 	}
 		
 

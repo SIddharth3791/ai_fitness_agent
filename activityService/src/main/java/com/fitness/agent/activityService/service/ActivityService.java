@@ -10,15 +10,26 @@ import com.fitness.agent.activityService.model.Activity;
 import com.fitness.agent.activityService.reporsitory.ActivityRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ActivityService {
 	
-	private final ActivityRepository activityRepository;
+	private final ActivityRepository activityRepository; 
+	private final UserValidationService userValidationService;
 
 	public ActivityResponse trackActivity(ActivityRequest request) {
+		boolean isValidUser = userValidationService.validateUser(request.getUserId());
+		
+		if(!isValidUser) {
+			log.error("Invalid User for User Id {} ", request.getUserId());
+			throw new RuntimeException("Invlaid User");
+		}
+		
 		Activity savedActivity = activityRepository.save(mapActivityFromRequest(request));
+		
 		return mapActivityResponse(savedActivity);
 	}
 	
