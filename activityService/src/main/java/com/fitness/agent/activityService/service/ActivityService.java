@@ -3,6 +3,8 @@ package com.fitness.agent.activityService.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.fitness.agent.activityService.dto.ActivityRequest;
 import com.fitness.agent.activityService.dto.ActivityResponse;
@@ -19,6 +21,13 @@ public class ActivityService {
 	
 	private final ActivityRepository activityRepository; 
 	private final UserValidationService userValidationService;
+	private final RabbitTemplate rabbitTemplate;
+	
+	@Value("${rabbitmq.exchange.name}")
+	private String exchange;
+	
+	@Value("${rabbitmq.routing.key}")
+	private String routingKey;
 
 	public ActivityResponse trackActivity(ActivityRequest request) {
 		boolean isValidUser = userValidationService.validateUser(request.getUserId());
@@ -29,6 +38,12 @@ public class ActivityService {
 		}
 		
 		Activity savedActivity = activityRepository.save(mapActivityFromRequest(request));
+		
+		try {
+			rabbitTemplate.convertAndSend(savedActivity);
+		}catch(Exception ex) {
+			log.error("Error While Publishing Activity {} ", savedActivity.toString());
+		}
 		
 		return mapActivityResponse(savedActivity);
 	}

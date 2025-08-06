@@ -9,6 +9,11 @@ spring:
    host: localhost 
    port: 27017
    database: fitness_activity_db
+ rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest 
 
 eureka:
  client:
@@ -17,3 +22,12 @@ eureka:
 
 user-service:
  base-url: http://USER-SERVICE
+
+rabbitmq:
+  exchange: 
+   name: fitness.exchange
+  queue:
+   name: activity.queue
+  routing: 
+   key: activity.tracking
+ 
