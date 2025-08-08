@@ -33,11 +33,8 @@ public class GeminiService {
 											        ContentRequest.Content.builder()
 											            .parts(Collections.singletonList(
 											                ContentRequest.Part.builder()
-											                    .text(prompt)
-											                    .build()
-											            ))
-											            .build()
-											    ))
+											                    .text(prompt).build()))
+											            .build()))
 											    .build();
 		
 		

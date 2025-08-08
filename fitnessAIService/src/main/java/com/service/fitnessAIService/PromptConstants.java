@@ -5,16 +5,12 @@ public class PromptConstants {
 	public final static String RECOMMENDATION_PROMPT = """ 
 			analyze this fitness activity and provided detail recommedation to imporve upon the activity. following is the Recommendation formate needed -
 			{
-				"analysis":{
-						"overall": "Overall analysis here",
-						"caloriesBurned": "Calories burned analysis here",
-						"heartRate": "Heart rate analysis here"
-					},
+				"analysis": "Overall analysis here" + "Calories burned analysis here" + "Heart rate analysis here",
 				"imporvements":[
 						{
 						
 							"area": "Area Name",
-							"Recommendation" : "Detailed recommendation",
+							"recommendation" : "Detailed recommendation",
 						}
 						
 					],

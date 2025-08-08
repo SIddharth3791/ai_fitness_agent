@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.service.fitnessAIService.model.Activity;
+import com.service.fitnessAIService.model.Recommendation;
+import com.service.fitnessAIService.repository.RecommendationRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,8 @@ public class ActivityMessageListener {
 	
 	private final ActivityAIService activityAIService;
 	
+	private final RecommendationRepository recommendationRepository;
+	
 	@Value("${rabbitmq.queue.name}")
 	private String queue;
 	
@@ -24,7 +28,10 @@ public class ActivityMessageListener {
 	public void processActivity(Activity activity) {
 		
 		log.info("Received Message :: Processing Activity with ID {}", activity.getId());
-		log.info("Generated Recommendation: {} ",activityAIService.generateRecommendation(activity));
+		
+		Recommendation aiRecommendation = activityAIService.generateRecommendation(activity);
+		
+		recommendationRepository.save(aiRecommendation);
 		
 	}
 
