@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ActivityMessageListener {
 	
-	private final RabbitTemplate rabbitTemplate;
+	private final ActivityAIService activityAIService;
 	
 	@Value("${rabbitmq.queue.name}")
 	private String queue;
@@ -24,6 +24,8 @@ public class ActivityMessageListener {
 	public void processActivity(Activity activity) {
 		
 		log.info("Received Message :: Processing Activity with ID {}", activity.getId());
+		log.info("Generated Recommendation: {} ",activityAIService.generateRecommendation(activity));
+		
 	}
 
 }
