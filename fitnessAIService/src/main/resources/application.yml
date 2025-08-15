@@ -1,37 +1,5 @@
-#server:
-# port: 8082
- 
 spring:
  application:
   name: ai-service
  config:
   import: optional:configserver:http://localhost:8888
-
-# data:
-#  mongodb:
-#   host: localhost 
-#   port: 27017 
-#   database: fitness_activity_db
-# rabbitmq:
-#  host: localhost
-#  port: 5672
-#  username: guest
-#  password: guest
-#
-#eureka:
-# client:
-#  serviceUrl:
-#   defaultZone: http://localhost:8761/eureka/
-#
-#rabbitmq:
-# exchange: 
-#  name: fitness.exchange
-# queue:
-#  name: activity.queue
-# routing: 
-#  key: activity.tracking
-#
-#gemini:
-# api:
-#  url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
-#  key: ${gemini.api.key}
