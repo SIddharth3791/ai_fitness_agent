@@ -33,5 +33,7 @@ eureka:
   serviceUrl:
    defaultZone: http://localhost:8761/eureka/
    
+user-service:
+ base-url: http://USER-SERVICE
 
  

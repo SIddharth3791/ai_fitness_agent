@@ -1,8 +1,7 @@
-package com.fitness.agent.UserService.dto;
+package com.fitness.apiGateway.model;
 
 import java.time.LocalDateTime;
 
-import com.fitness.agent.UserService.model.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
