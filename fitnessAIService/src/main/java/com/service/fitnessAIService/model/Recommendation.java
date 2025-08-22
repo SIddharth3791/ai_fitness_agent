@@ -30,8 +30,10 @@ public class Recommendation {
 	private String activityId;
 	private String userId;
 	private String activityType;
+	private Integer caloriesBurned;
+	private Integer duration;
 	private String recommendation;
-	private List<Imporvement>imporvements;
+	private List<Improvements>improvements;
 	private List<Suggestion> suggestions;
 	private List<String> safety;
 	
@@ -43,7 +45,7 @@ public class Recommendation {
     @Builder
     @Getter
     @Setter
-    public static class Imporvement {
+    public static class Improvements {
         private String area;
         private String recommendation;
     }

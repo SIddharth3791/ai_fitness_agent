@@ -6,7 +6,7 @@ public class PromptConstants {
 			analyze this fitness activity and provided detail recommedation to imporve upon the activity. following is the Recommendation formate needed -
 			{
 				"analysis": "Overall analysis here" + "Calories burned analysis here" + "Heart rate analysis here",
-				"imporvements":[
+				"improvements":[
 						{
 						
 							"area": "Area Name",

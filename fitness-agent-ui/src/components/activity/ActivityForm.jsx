@@ -1,4 +1,5 @@
 import React from "react";
+import { addActivity } from "../../service/api";
 import Box from '@mui/material/Box';
 import { Button, FormControl, InputLabel, Select, TextField } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
@@ -6,7 +7,7 @@ import { Card, CardContent, CardActions, CardHeader, Typography } from '@mui/mat
 
 
 const ActivityForm = ({ onActivityAdded }) => {
-    const [activity, setActivity] = React.useState({type: 'RUNNING', duration: '', caloriesBurned: '', additionalMetrics: {} });
+    const [activity, setActivity] = React.useState({userId: '', type: 'RUNNING', duration: '', caloriesBurned: '', additionalMetrics: {} });
 
     const handleSubmit = async(event) => {
         event.preventDefault();
@@ -14,9 +15,9 @@ const ActivityForm = ({ onActivityAdded }) => {
         try{
             // Example: Send form data to the server
             console.log("Form submitted");
-            // await addActivity(activity)
+            await addActivity(activity)
             onActivityAdded();
-            setActivity({type: 'RUNNING', duration: '', caloriesBurned: '' });
+            setActivity({userId: '', type: 'RUNNING', duration: '', caloriesBurned: '' });
         }catch(error){
             console.error("Error submitting form:", error);
         }

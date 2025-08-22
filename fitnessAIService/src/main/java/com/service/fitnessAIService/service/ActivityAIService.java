@@ -46,8 +46,10 @@ public class ActivityAIService {
 									.activityId(activity.getId())
 									.userId(activity.getUserId())
 									.activityType(activity.getType())
+									.duration(activity.getDuration())
+									.caloriesBurned(activity.getCaloriesBurned())
 									.recommendation(recommendationNode.path(ANALYSIS_NODE).asText())
-									.imporvements(getImprovements(recommendationNode.path("imporvements")))
+									.improvements(getImprovements(recommendationNode.path("improvements")))
 									.suggestions(getSuggestion(recommendationNode.path("suggestions")))
 									.safety(getSafety(recommendationNode.path("safety")))
 									.createdAt(LocalDateTime.now())
@@ -101,15 +103,15 @@ public class ActivityAIService {
 									activity.getAdditionalMetrics());
 	}
 	
-	private List<Recommendation.Imporvement> getImprovements(JsonNode improvementsNode){
-		List<Recommendation.Imporvement> imporvements = new ArrayList<>();
+	private List<Recommendation.Improvements> getImprovements(JsonNode improvementsNode){
+		List<Recommendation.Improvements> improvements = new ArrayList<>();
 		improvementsNode.forEach(improv -> {
-			Recommendation.Imporvement imporvement = Recommendation.Imporvement.builder()
+			Recommendation.Improvements improvement = Recommendation.Improvements.builder()
 														.area(improv.path("area").asText())
 														.recommendation(improv.path("recommendation").asText()).build();
-			imporvements.add(imporvement);
+			improvements.add(improvement);
 		});
-		return imporvements;
+		return improvements;
 	}
 	
 	private List<Recommendation.Suggestion> getSuggestion(JsonNode suggestionNode){
